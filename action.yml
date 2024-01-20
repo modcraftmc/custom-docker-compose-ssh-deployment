@@ -37,6 +37,8 @@ inputs:
     description: Docker Hub username used for login.
   dockerhub_password:
     description: Docker Hub password used for login.
+  directory:
+    description: Directory
 runs:
   using: docker
   image: Dockerfile
@@ -53,3 +55,4 @@ runs:
     DOCKER_COMPOSE_DOWN: ${{ inputs.docker_compose_down }}
     DOCKERHUB_USERNAME: ${{ inputs.dockerhub_username }}
     DOCKERHUB_PASSWORD: ${{ inputs.dockerhub_password }}
+    DIRECTORY: ${{ inputs.directory }}
