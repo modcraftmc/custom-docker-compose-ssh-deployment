@@ -33,7 +33,7 @@ log() {
 log 'Exporting environment variables...';
 export $EXPORTS;
 
-log $(env);
+log \"\$(env)\";
 
 if [ -d \$workdir ]
 then
