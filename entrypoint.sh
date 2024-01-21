@@ -33,6 +33,8 @@ log() {
 log 'Exporting environment variables...';
 export $EXPORTS;
 
+log $(env);
+
 if [ -d \$workdir ]
 then
   log 'Deleting workspace directory...';
