@@ -1,4 +1,4 @@
-name: Custom Docker Compose SSH Deployment
+name: Goldor Custom Docker Compose SSH Deployment
 description: Deploy a repository with docker-compose via SSH to a remote host.
 branding:
   icon: anchor
