@@ -31,7 +31,7 @@ log() {
 };
 
 log 'Exporting environment variables...';
-export \"$EXPORTS\";
+export $(echo $EXPORTS | tr ";" " ");
 
 log \"\$(env)\";
 
