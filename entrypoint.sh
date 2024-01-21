@@ -30,7 +30,7 @@ log() {
     echo '>> [remote]' \$@ ;
 };
 
-log 'Exporting environment variables...';
+log 'Exporting environment variables... ($EXPORTS))';
 export $(echo $EXPORTS | tr ";" " ");
 
 log \"\$(env)\";
