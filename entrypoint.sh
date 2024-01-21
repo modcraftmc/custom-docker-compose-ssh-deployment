@@ -30,6 +30,9 @@ log() {
     echo '>> [remote]' \$@ ;
 };
 
+log 'Exporting environment variables...';
+export $EXPORTS;
+
 if [ -d \$workdir ]
 then
   log 'Deleting workspace directory...';

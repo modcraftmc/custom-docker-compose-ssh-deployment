@@ -39,6 +39,8 @@ inputs:
     description: Docker Hub password used for login.
   directory:
     description: Directory
+  exports:
+    description: List of environment variables to export on the remote host.
 runs:
   using: docker
   image: Dockerfile
@@ -56,3 +58,4 @@ runs:
     DOCKERHUB_USERNAME: ${{ inputs.dockerhub_username }}
     DOCKERHUB_PASSWORD: ${{ inputs.dockerhub_password }}
     DIRECTORY: ${{ inputs.directory }}
+    EXPORTS: ${{ inputs.exports }}
