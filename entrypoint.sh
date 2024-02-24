@@ -30,9 +30,6 @@ log() {
     echo '>> [remote]' \$@ ;
 };
 
-log 'Exporting environment variables...';
-export $(echo $EXPORTS | tr ";" " ");
-
 log \"\$(env)\";
 
 if [ -d \$workdir ]
@@ -47,9 +44,12 @@ mkdir \$workdir;
 log 'Unpacking workspace...';
 tar -C \$workdir -xjv;
 
-log 'Launching docker compose...';
 cd \$workdir;
 
+log 'Exporting environment variables...';
+$(echo $EXPORTS | tr ";" "\n") > .env
+
+log 'Launching docker compose...';
 if $DOCKER_COMPOSE_DOWN
 then
   log 'Executing docker compose down...';
