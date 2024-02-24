@@ -47,7 +47,7 @@ tar -C \$workdir -xjv;
 cd \$workdir;
 
 log 'Exporting environment variables...';
-echo $EXPORTS | tr \";\" \" \" > .env
+echo $EXPORTS | tr \";\" \"\n\" > .env;
 
 log 'Launching docker compose...';
 if $DOCKER_COMPOSE_DOWN
