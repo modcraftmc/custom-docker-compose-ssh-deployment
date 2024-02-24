@@ -14,8 +14,13 @@ cleanup() {
 }
 trap cleanup EXIT
 
+log 'Exporting environment variables...';
+echo "$EXPORTS" | tr \";\" \"\n\" > .env;
+
 log "Packing workspace into archive to transfer onto remote machine."
 tar cjvf /tmp/workspace.tar.bz2 $TAR_PACKAGE_OPERATION_MODIFIERS .
+
+rm .env
 
 log "Launching ssh agent."
 eval `ssh-agent -s`
@@ -45,9 +50,6 @@ log 'Unpacking workspace...';
 tar -C \$workdir -xjv;
 
 cd \$workdir;
-
-log 'Exporting environment variables...';
-echo $EXPORTS | tr \";\" \"\n\" > .env;
 
 log 'Launching docker compose...';
 if $DOCKER_COMPOSE_DOWN
