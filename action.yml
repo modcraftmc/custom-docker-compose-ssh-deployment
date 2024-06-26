@@ -1,4 +1,4 @@
-name: Goldor Custom Docker Compose SSH Deployment
+name: ModcraftMC Custom Docker Compose SSH Deployment
 description: Deploy a repository with docker-compose via SSH to a remote host.
 branding:
   icon: anchor
@@ -54,8 +54,9 @@ runs:
     USE_DOCKER_STACK: ${{ inputs.use_stack }}
     NO_CACHE: ${{ inputs.no_cache }}
     TAR_PACKAGE_OPERATION_MODIFIERS: ${{ inputs.tar_package_operation_modifiers }}
-    DOCKER_COMPOSE_DOWN: ${{ inputs.docker_compose_down }}
+    ZERO_DOWN_TIME: ${{ inputs.zero_down_time }}
     DOCKERHUB_USERNAME: ${{ inputs.dockerhub_username }}
     DOCKERHUB_PASSWORD: ${{ inputs.dockerhub_password }}
     DIRECTORY: ${{ inputs.directory }}
     EXPORTS: ${{ inputs.exports }}
+    DOCKER_CONTAINER_NAME: ${{ inputs.docker_container_name }}

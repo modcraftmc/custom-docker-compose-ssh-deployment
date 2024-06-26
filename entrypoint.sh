@@ -57,6 +57,8 @@ if $ZERO_DOWN_TIME
 then
   log 'Executing docker compose down...';
   docker compose -f \"$DOCKER_COMPOSE_FILENAME\" -d --scale $DOCKER_CONTAINER_NAME=2
+else
+docker compose -f \"$DOCKER_COMPOSE_FILENAME\" -p \"$DOCKER_COMPOSE_PREFIX\" down
 fi
 
 if [ -n \"$DOCKERHUB_USERNAME\" ] && [ -n \"$DOCKERHUB_PASSWORD\" ]
