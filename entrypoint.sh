@@ -52,10 +52,11 @@ tar -C \$workdir -xjv;
 cd \$workdir;
 
 log 'Launching docker compose...';
-if $DOCKER_COMPOSE_DOWN
+log 'Launching scaling containers.';
+if $ZERO_DOWN_TIME
 then
   log 'Executing docker compose down...';
-  docker compose -f \"$DOCKER_COMPOSE_FILENAME\" -p \"$DOCKER_COMPOSE_PREFIX\" down
+  docker compose -f \"$DOCKER_COMPOSE_FILENAME\" -d --scale $DOCKER_CONTAINER_NAME=2
 fi
 
 if [ -n \"$DOCKERHUB_USERNAME\" ] && [ -n \"$DOCKERHUB_PASSWORD\" ]
@@ -70,9 +71,9 @@ docker compose -f \"$DOCKER_COMPOSE_FILENAME\" -p \"$DOCKER_COMPOSE_PREFIX\" pul
 if $NO_CACHE
 then
   docker compose -f \"$DOCKER_COMPOSE_FILENAME\" -p \"$DOCKER_COMPOSE_PREFIX\" build --no-cache
-  docker compose -f \"$DOCKER_COMPOSE_FILENAME\" -p \"$DOCKER_COMPOSE_PREFIX\" up -d --remove-orphans --force-recreate
+  docker compose -f \"$DOCKER_COMPOSE_FILENAME\" -p \"$DOCKER_COMPOSE_PREFIX\" up -d --remove-orphans --force-recreate --scale $DOCKER_CONTAINER_NAME=1 --no-recreate $DOCKER_CONTAINER_NAME;
 else
-  docker compose -f \"$DOCKER_COMPOSE_FILENAME\" -p \"$DOCKER_COMPOSE_PREFIX\" up -d --remove-orphans --build;
+  docker compose -f \"$DOCKER_COMPOSE_FILENAME\" -p \"$DOCKER_COMPOSE_PREFIX\" up -d --remove-orphans --build --scale $DOCKER_CONTAINER_NAME=1 --no-recreate $DOCKER_CONTAINER_NAME;
 fi"
 
 log "Connecting to remote host."
