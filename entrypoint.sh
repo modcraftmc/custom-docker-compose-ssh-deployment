@@ -73,9 +73,19 @@ docker compose -f \"$DOCKER_COMPOSE_FILENAME\" -p \"$DOCKER_COMPOSE_PREFIX\" pul
 if $NO_CACHE
 then
   docker compose -f \"$DOCKER_COMPOSE_FILENAME\" -p \"$DOCKER_COMPOSE_PREFIX\" build --no-cache
-  docker compose -f \"$DOCKER_COMPOSE_FILENAME\" -p \"$DOCKER_COMPOSE_PREFIX\" up -d --remove-orphans --force-recreate --scale $DOCKER_CONTAINER_NAME=1 --no-recreate $DOCKER_CONTAINER_NAME;
+  if $ZERO_ZERO_DOWN_TIME
+  then
+    docker compose -f \"$DOCKER_COMPOSE_FILENAME\" -p \"$DOCKER_COMPOSE_PREFIX\" up -d --remove-orphans --force-recreate --scale $DOCKER_CONTAINER_NAME=1 --no-recreate $DOCKER_CONTAINER_NAME;
+  else
+    docker compose -f \"$DOCKER_COMPOSE_FILENAME\" -p \"$DOCKER_COMPOSE_PREFIX\" up -d --remove-orphans --force-recreate;
+  fi
 else
-  docker compose -f \"$DOCKER_COMPOSE_FILENAME\" -p \"$DOCKER_COMPOSE_PREFIX\" up -d --remove-orphans --build --scale $DOCKER_CONTAINER_NAME=1 --no-recreate $DOCKER_CONTAINER_NAME;
+  if $ZERO_ZERO_DOWN_TIME
+  then
+    docker compose -f \"$DOCKER_COMPOSE_FILENAME\" -p \"$DOCKER_COMPOSE_PREFIX\" up -d --remove-orphans --build --scale $DOCKER_CONTAINER_NAME=1 --no-recreate $DOCKER_CONTAINER_NAME;
+  else
+    docker compose -f \"$DOCKER_COMPOSE_FILENAME\" -p \"$DOCKER_COMPOSE_PREFIX\" up -d --remove-orphans --build;
+    fi
 fi"
 
 log "Connecting to remote host."
