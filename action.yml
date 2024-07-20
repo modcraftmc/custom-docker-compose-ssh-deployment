@@ -41,6 +41,11 @@ inputs:
     description: Directory
   exports:
     description: List of environment variables to export on the remote host.
+  zero_down_time:
+    description: Specify if docker try to avoid downtime when starting container (if set to true require <docker_container_name> to be set).
+    default: 'false'
+  docker_container_name:
+    description: Used to identify container when scaling for zero down time.
 runs:
   using: docker
   image: Dockerfile
