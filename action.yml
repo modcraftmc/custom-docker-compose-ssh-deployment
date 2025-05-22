@@ -46,6 +46,9 @@ inputs:
     default: 'false'
   docker_container_name:
     description: Used to identify container when scaling for zero down time.
+  local_mode:
+    description: use ssh or not
+    default: 'false'
 runs:
   using: docker
   image: Dockerfile
