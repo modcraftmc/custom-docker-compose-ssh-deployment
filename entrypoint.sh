@@ -22,10 +22,12 @@ tar cjvf /tmp/workspace.tar.bz2 $TAR_PACKAGE_OPERATION_MODIFIERS .
 
 rm .env
 
-log "Launching ssh agent."
-eval `ssh-agent -s`
+if ! $LOCAL_MODE
+  log "Launching ssh agent."
+  eval `ssh-agent -s`
 
-ssh-add <(echo "$SSH_PRIVATE_KEY")
+  ssh-add <(echo "$SSH_PRIVATE_KEY")
+fi
 
 remote_command="set -e;
 
