@@ -88,8 +88,14 @@ else
   fi
 fi"
 
-log "Connecting to remote host."
-ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ServerAliveInterval=100 \
-  "$SSH_USER@$SSH_HOST" -p "$SSH_PORT" \
-  "$remote_command" \
-  < /tmp/workspace.tar.bz2
+if $LOCAL_MODE
+then
+  log "Running in local mode."
+  bzcat /tmp/workspace.tar.bz2 | bash -s -- "$remote_command"
+else
+  log "Connecting to remote host."
+  ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ServerAliveInterval=100 \
+    "$SSH_USER@$SSH_HOST" -p "$SSH_PORT" \
+    "$remote_command" \
+    < /tmp/workspace.tar.bz2
+fi

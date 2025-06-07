@@ -46,6 +46,9 @@ inputs:
     default: 'false'
   docker_container_name:
     description: Used to identify container when scaling for zero down time.
+  local_mode:
+    description: run local mode wihout ssh.
+    default: 'false'
 runs:
   using: docker
   image: Dockerfile
@@ -65,3 +68,4 @@ runs:
     DIRECTORY: ${{ inputs.directory }}
     EXPORTS: ${{ inputs.exports }}
     DOCKER_CONTAINER_NAME: ${{ inputs.docker_container_name }}
+    LOCAL_MODE: ${{ inputs.local_mode }}
