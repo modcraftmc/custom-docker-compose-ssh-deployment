@@ -23,6 +23,7 @@ tar cjvf /tmp/workspace.tar.bz2 $TAR_PACKAGE_OPERATION_MODIFIERS .
 rm .env
 
 if ! $LOCAL_MODE
+then
   log "Launching ssh agent."
   eval `ssh-agent -s`
 
